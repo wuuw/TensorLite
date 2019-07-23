@@ -1,4 +1,4 @@
-from graph import Operation, Graph, Variable, placeholder
+from tensorlite.graph import Operation, Graph, Variable, placeholder
 import numpy as np
 
 class add(Operation):
