@@ -33,18 +33,18 @@ class matmul(Operation):
         return np.dot(x_value, y_value)
 
 
-# Create a new graph
+# 创建计算图
 Graph().as_default()
 
-# Create variables
+# variables
 A = Variable([[1, 0], [0, -1]])
 b = Variable([1, 1])
 
-# Create placeholder
+# placeholder
 x = placeholder()
 
-# Create hidden node y
+# 中间节点 y
 y = matmul(A, x)
 
-# Create output node z
+# Operation 的输出节点 z
 z = add(y, b)
