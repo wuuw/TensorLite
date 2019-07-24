@@ -37,9 +37,9 @@ class matmul(Operation):
 y = A * x
 z = y + b
 
-A:Variable    ->|
-                |------> y ------>|
-x:placeholder ->|                 |---> z
+A:Variable ----->|
+                 |------> y ------>|
+x:placeholder -->|                 |---> z
                     b:Variable -->|
                     
 A.consumers = [y]
