@@ -1,4 +1,5 @@
 from tensorlite.graph import Operation, Graph, Variable, placeholder
+from tensorlite.session import Session
 import numpy as np
 
 class add(Operation):
@@ -12,6 +13,7 @@ class add(Operation):
         :param y: node y
         """
         super(add, self).__init__([x, y])
+        self.output = None
 
     def compute(self, x_value, y_value):
         """
@@ -55,17 +57,24 @@ z.consumers = []
 """
 
 # 创建计算图
-# Graph().as_default()
+Graph().as_default()
 
 # variables
-# A = Variable([[1, 0], [0, -1]])
-# b = Variable([1, 1])
+A = Variable([[1, 0], [0, -1]])
+b = Variable([1, 1])
 
 # placeholder
-# x = placeholder()
+x = placeholder()
 
 # 中间节点 y
-# y = matmul(A, x)
+y = matmul(A, x)
 
 # Operation 的输出节点 z
-# z = add(y, b)
+z = add(y, b)
+
+# 运行计算图
+session = Session()
+output = session.run(z, {
+    x: [1, 2]
+})
+print(output)

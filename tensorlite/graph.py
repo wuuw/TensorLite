@@ -1,3 +1,4 @@
+import numpy as np
 class Graph:
     """
     构建计算图 Graph
@@ -28,6 +29,9 @@ class Operation:
         # 消费者节点使用该节点的输出作为输入
         self.consumers = []
 
+        # 节点的输出值
+        self.output = None
+
         # 同时该节点也作为输入节点的消费节点
         for node in input_nodes:
             node.consumers.append(self)
@@ -49,6 +53,8 @@ class placeholder:
     def __init__(self):
         # 使用该节点作为输入的消费者节点列表
         self.consumers = []
+        # 节点的输出值
+        self.output = None
         # 将该 placeholder 加入到计算图中
         _default_graph.placeholders.append(self)
 
@@ -59,7 +65,17 @@ class Variable:
     一般可以训练（trainable），如 w * x + b 中的 w 和 b
     """
     def __init__(self, initial_value=None):
+        """
+        如果初始化值是 list 对象，转化为 np.array 对象。
+        因 placeholder 没有初始值，为了维护代码的一致性，
+        该过程与 placeholder 中的转化一并在 session.run 中完成
+        """
+        # if type(initial_value) == list:
+        #     initial_value = np.array(initial_value)
+
         self.value = initial_value
         self.consumers = []
+        # 节点的输出值
+        self.output = None
         # 将该 variable 加入到计算图中
         _default_graph.variables.append(self)
