@@ -40,7 +40,7 @@ z = y + b
 A:Variable ----->|
                  |------> y ------>|
 x:placeholder -->|                 |---> z
-                    b:Variable -->|
+                     b:Variable -->|
                     
 A.consumers = [y]
 x.consumers = [y]
